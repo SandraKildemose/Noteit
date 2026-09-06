@@ -1,0 +1,874 @@
+<!doctype html>
+<html lang="da">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content">
+  <title>Note'it | Universitetsnotesbog</title>
+  <meta name="description" content="Note'it er en intelligent universitetsnotesbog med værktøjer, der tilpasses dit studieområde.">
+  <meta name="theme-color" content="#f5f1ea">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Note'it">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="format-detection" content="telephone=no">
+  <script>(function(){try{var t=localStorage.getItem('noted-theme')||'classic';if(t==='sunset')t='pearl';document.documentElement.dataset.appTheme=t;}catch(e){}}());</script>
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="assets/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="assets/icon-512.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Inter:wght@400;500;600;700;800&family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <link rel="stylesheet" href="styles.css?v=__BUILD__&t=__STAMP__&ui=ide-notes-3">
+  <meta name="noteit-build" content="__BUILD__">
+  <script>window.__NOTEIT_BUILD__='__BUILD__';</script>
+</head>
+<body>
+
+<!-- ═══════════ LANDING PAGE (lys  til  som note-appen) ═══════════ -->
+<div id="landing">
+  <nav class="landing-nav">
+    <div class="landing-logo"><span class="landing-logo-mark" aria-hidden="true"><i></i></span> <span class="noteit-wordmark">Note<sup>'it</sup></span> <span class="app-build-tag landing-build-tag">Build __BUILD__</span></div>
+    <div class="landing-links">
+      <a href="#features">Funktioner</a>
+      <a href="#preview">Sådan ser det ud</a>
+    </div>
+    <div class="landing-actions">
+      <label class="landing-language-switch" title="Skift sprog">
+        <span class="flag-mark flag-dk" id="landingFlag"></span>
+        <select id="landingLanguage" aria-label="Sprog på forsiden">
+          <option value="da">DA</option><option value="en">EN</option><option value="sv">SV</option>
+          <option value="no">NO</option><option value="fr">FR</option><option value="es">ES</option>
+        </select>
+      </label>
+      <button type="button" class="btn-ghost" data-goto-app onclick="event.preventDefault(); typeof goApp === 'function' ? goApp() : document.getElementById('welcomeDialog').showModal()">Åbn app</button>
+      <button type="button" class="btn-primary" data-goto-app onclick="event.preventDefault(); typeof goApp === 'function' ? goApp() : document.getElementById('welcomeDialog').showModal()">Begynd at skrive</button>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-text">
+      <p class="hero-kicker">Din universitetsnotesbog</p>
+      <h1><span class="hero-wordmark">Note<sup>'it</sup></span> gør det nemmere at tage noter og lære samtidig</h1>
+      <p class="hero-lead">En interaktiv notesbog til STEM. Vælg dit studieområde, og få værktøjer til matematik, naturvidenskab, IT, ingeniørfag, psykologi, sundhed og medicin.</p>
+      <div class="hero-btns">
+        <button type="button" class="btn-primary btn-lg" data-goto-app onclick="event.preventDefault(); typeof goApp === 'function' ? goApp() : document.getElementById('welcomeDialog').showModal()">Åbn din notesbog</button>
+        <a class="btn-outline-light btn-lg" href="#preview">Se hvordan den virker</a>
+      </div>
+      <div class="hero-features">
+        <div class="hero-feat"><span class="hero-feat-icon">01</span> Skriv noter</div>
+        <div class="hero-feat"><span class="hero-feat-icon">02</span> Planlæg eksamen</div>
+        <div class="hero-feat"><span class="hero-feat-icon">03</span> Træn og følg fremdrift</div>
+      </div>
+    </div>
+    <div class="hero-mockup">
+      <div class="landing-app-shot">
+        <div class="landing-shot-bar">
+          <span class="mockup-dot r"></span><span class="mockup-dot y"></span><span class="mockup-dot g"></span>
+          <span class="landing-shot-title">Note'it · Notesbog</span>
+        </div>
+        <div class="landing-shot-body">
+          <aside class="landing-shot-sidebar">
+            <div class="landing-shot-logo" aria-hidden="true"><i></i></div>
+            <span>Hjem</span><span>Søgning</span><strong>Notesbog</strong>
+            <small>NOTER</small>
+            <span>Bachelor</span><span>Semester 2</span>
+          </aside>
+          <div class="landing-notebook">
+            <div class="landing-book">
+              <div class="landing-book-cover">
+                <span class="landing-book-rings"></span>
+                <div class="book-wordmark">Note<sup>'it</sup></div>
+                <small>Dine fag og forelæsningsnoter</small>
+              </div>
+              <div class="landing-paper paper-one"><b>Robotik</b><span>4 noter</span><i></i></div>
+              <div class="landing-paper paper-two"><b>Matematik</b><span>7 noter</span><i></i></div>
+              <div class="landing-paper paper-three"><b>Kemi</b><span>3 noter</span><i></i></div>
+            </div>
+            <p>Hold over et papir, og åbn dine noter direkte.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="workspace-section" id="preview">
+    <div class="workspace-inner">
+      <div class="workspace-left">
+        <h2>Fra forelæsning til forståelse</h2>
+        <p class="workspace-lead">Note'it samler dine fag, forelæsninger og tekniske værktøjer i én notesbog. Du skriver naturligt, mens appen hjælper dig med at strukturere, undersøge og forstå stoffet.</p>
+        <div class="workspace-checks">
+          <div class="workspace-check">Interaktiv notesbog med alle dine fag</div>
+          <div class="workspace-check">Bachelor, professionsbachelor, Master og Ph.d.</div>
+          <div class="workspace-check">Læringshjælp direkte på markeret tekst</div>
+          <div class="workspace-check">Værktøjspakker til STEM, kode, modeller, laboratoriearbejde og data</div>
+        </div>
+        <button type="button" class="btn-primary btn-lg" data-goto-app onclick="event.preventDefault(); typeof goApp === 'function' ? goApp() : document.getElementById('welcomeDialog').showModal()">Åbn Note'it</button>
+      </div>
+      <div class="preview-pinboard" id="tools">
+        <div class="preview-board-title">Se hvordan det virker</div>
+        <button type="button" class="guide-postit-stack" id="previewGuideStack" aria-label="Vis næste trin i guiden">
+          <span class="guide-card guide-yellow is-top" data-guide-key="notes"><b>1. Skriv og organisér</b><span>Saml fag, noter og semestre.</span></span>
+          <span class="guide-card guide-blue is-next" data-guide-key="tools"><b>2. Brug værktøjer</b><span>Indsæt kode, formler og PDF.</span></span>
+          <span class="guide-card guide-green is-third" data-guide-key="plan"><b>3. Lav din plan</b><span>Fordel pensum og repetition.</span></span>
+          <span class="guide-card guide-pink is-back" data-guide-key="train"><b>4. Træn aktivt</b><span>Øv med flashcards og spørgsmål.</span></span>
+          <span class="guide-stack-action">Tryk i midten for næste</span>
+        </button>
+        <div class="preview-board-detail" id="previewBoardDetail"><b>1 · Notesbogen samler det hele</b><span>Tryk midt på bunken for at se næste trin.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="landing-journey-board" id="features" aria-labelledby="journey-title">
+    <div class="journey-board-head">
+      <p class="hero-kicker">Din studierejse</p>
+      <h2 id="journey-title">Fra første note til eksamen</h2>
+      <p>Tryk på en seddel og se, hvordan delene hænger sammen.</p>
+    </div>
+    <div class="journey-note-stack">
+      <button type="button" class="journey-note note-yellow active" data-journey-note="01"><i></i><b>01</b><strong>Skriv noter</strong><span>Noter, PDF, kode og formler samlet.</span></button>
+      <button type="button" class="journey-note note-blue" data-journey-note="02"><i></i><b>02</b><strong>Planlæg eksamen</strong><span>Vælg fag, datoer og pensum.</span></button>
+      <button type="button" class="journey-note note-green" data-journey-note="03"><i></i><b>03</b><strong>Læs efter planen</strong><span>Åbn præcis det materiale, du skal bruge.</span></button>
+      <button type="button" class="journey-note note-pink" data-journey-note="04"><i></i><b>04</b><strong>Træn aktivt</strong><span>Flashcards, spørgsmål og prøveeksamen.</span></button>
+      <button type="button" class="journey-note note-lilac" data-journey-note="05"><i></i><b>05</b><strong>Følg fremdriften</strong><span>Se, hvad du kan, og hvad du bør gentage.</span></button>
+    </div>
+    <div class="journey-detail" id="journeyDetail"><b>01 · Skriv noter</b><span>Start med et fag, og saml dine forelæsninger i en notesbog, der følger dit semester.</span></div>
+  </section>
+
+  <section class="landing-study-picker" aria-labelledby="study-picker-title">
+    <div class="landing-study-intro">
+      <p class="hero-kicker">Tilpasses dit fag</p>
+      <h2 id="study-picker-title">Hvad læser du?</h2>
+      <p>Vælg dit hovedfag — værktøjerne tilpasses automatisk.</p>
+    </div>
+    <div class="landing-study-board-shell">
+      <div class="landing-study-options" id="landingStudyOptions"></div>
+    </div>
+  </section>
+
+  <section class="trusted">
+    <p>En notesbog, der tilpasser sig det, du læser på universitetet.</p>
+    <div class="trusted-cta"><button type="button" class="btn-primary btn-lg" data-goto-app onclick="event.preventDefault(); typeof goApp === 'function' ? goApp() : document.getElementById('welcomeDialog').showModal()">Begynd gratis →</button></div>
+  </section>
+</div>
+
+<!-- ═══════════ APP  til  mockup layout ═══════════ -->
+<div id="app">
+  <header class="app-topbar">
+    <div class="topbar-brand"><span class="brand-mark-sm" aria-hidden="true"><i></i></span> <span class="noteit-wordmark">Note<sup>'it</sup></span></div>
+    <div class="topbar-search-wrap">
+      <span class="search-icon">⌕</span>
+      <input class="topbar-search" id="globalSearch" type="search" placeholder="Søg i noter..." autocomplete="off">
+    </div>
+    <div class="topbar-actions">
+      <button type="button" class="topbar-icon-btn panel-toggle-btn panel-open" id="toggleWidgets" title="Skjul hjælpepanelet" aria-label="Vis eller skjul hjælpepanelet" aria-expanded="true"><span class="panel-toggle-icon"></span></button>
+      <div class="theme-picker-wrap">
+        <button type="button" class="topbar-icon-btn theme-picker-btn" id="toggleThemePicker" title="Skift farvetema" aria-label="Skift farvetema" aria-expanded="false" aria-haspopup="listbox"><span class="theme-picker-icon" aria-hidden="true"></span></button>
+        <div class="theme-picker-popover" id="themePickerPopover" hidden role="dialog" aria-label="Vælg farvetema"></div>
+      </div>
+      <button type="button" class="topbar-icon-btn dark-mode-btn" id="toggleDarkMode" title="Slå dark mode til" aria-label="Slå dark mode til" aria-pressed="false"><span class="dark-mode-icon"></span></button>
+      <div class="topbar-profile">
+        <input id="profileImageInput" type="file" accept="image/*" hidden>
+        <button type="button" class="topbar-icon-btn topbar-avatar" title="Skift profilbillede" aria-label="Skift profilbillede">SK</button>
+        <span class="topbar-profile-name" id="topbarProfileName"></span>
+      </div>
+      <button type="button" class="logout-btn" id="logoutButton" data-ui="logout">Log ud</button>
+    </div>
+  </header>
+
+  <div class="app-body">
+    <aside class="app-sidebar">
+      <nav class="sidebar-nav" aria-label="Hovedmenu">
+        <button type="button" class="nav-item active" data-nav="notebook">
+          <span class="nav-icon nav-icon-notebook" aria-hidden="true">
+            <svg viewBox="0 0 44 40" class="sidebar-notebook-svg" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="11" y="4" width="30" height="32" rx="2" fill="#fff" stroke="currentColor" stroke-width="1.2"/>
+              <path d="M14 10h24M14 14h24M14 18h18M14 22h22M14 26h16" stroke="currentColor" stroke-width="1" opacity=".35"/>
+              <circle cx="6" cy="9" r="2.2" stroke="currentColor" stroke-width="1.3"/>
+              <circle cx="6" cy="15" r="2.2" stroke="currentColor" stroke-width="1.3"/>
+              <circle cx="6" cy="21" r="2.2" stroke="currentColor" stroke-width="1.3"/>
+              <circle cx="6" cy="27" r="2.2" stroke="currentColor" stroke-width="1.3"/>
+              <circle cx="6" cy="33" r="2.2" stroke="currentColor" stroke-width="1.3"/>
+              <rect x="3" y="3" width="7" height="34" rx="1" fill="currentColor" fill-opacity=".12" stroke="currentColor" stroke-width="1"/>
+            </svg>
+          </span>
+          <span class="nav-label">Notesbog</span>
+        </button>
+        <button type="button" class="nav-item ide-nav-item" aria-disabled="true">
+          <span class="nav-icon" aria-hidden="true">□</span>
+          <span class="nav-label">Explorer</span>
+        </button>
+        <button type="button" class="nav-item ide-nav-item" aria-disabled="true">
+          <span class="nav-icon" aria-hidden="true">⌕</span>
+          <span class="nav-label">Søg</span>
+        </button>
+        <button type="button" class="nav-item ide-nav-item" aria-disabled="true">
+          <span class="nav-icon" aria-hidden="true">⌘</span>
+          <span class="nav-label">Kildekontrol</span>
+        </button>
+        <button type="button" class="nav-item ide-nav-item" aria-disabled="true">
+          <span class="nav-icon" aria-hidden="true">▷</span>
+          <span class="nav-label">Kør &amp; Debug</span>
+        </button>
+        <button type="button" class="nav-item ide-nav-item" aria-disabled="true">
+          <span class="nav-icon" aria-hidden="true">▦</span>
+          <span class="nav-label">Udvidelser</span>
+        </button>
+      </nav>
+
+      <div class="sidebar-block notes-block">
+        <div class="block-head">
+          <span>NOTER+</span>
+        </div>
+        <div id="semesters" class="semester-chips"></div>
+        <div id="subjects"></div>
+        <div id="recentlyDeleted"></div>
+      </div>
+
+      <div class="sidebar-block compact">
+        <button type="button" class="side-link coming-soon-link" id="openProjectsGroups" disabled aria-disabled="true">
+          <span data-ui="projectsAndGroupWork">Projekter &amp; gruppearbejde</span>
+          <span class="soon-badge" data-ui="comingSoonBadge">Kommer snart</span>
+        </button>
+        <button type="button" class="side-link" id="openExam" data-ui="examPlan">📅 Eksamensplan</button>
+        <button type="button" class="side-link exam-training-link" id="openExamPrep" data-ui="examPreparation">✦ Eksamenstræning</button>
+        <button type="button" class="side-link" id="openSettings" data-ui="settings">Indstillinger</button>
+        <button type="button" class="side-link side-guide-link" id="openGuide" data-ui="guide">Vis introduktion</button>
+      </div>
+
+      <div class="exam-sidebar-card" id="examSidebarCard"></div>
+      <div class="sidebar-sync" id="syncStatus"><span class="sync-dot"></span> Synkroniseret</div>
+      <div class="storage-note" id="profileStatus">Automatisk lokal lagring</div>
+    </aside>
+
+    <div class="main-area">
+      <main id="workspace">
+        <div class="no-page">
+          <h2>Velkommen</h2>
+          <p>Klik på et fag til venstre, tryk derefter <strong>+</strong> for at oprette dit første dokument.</p>
+          <button type="button" class="btn-primary" id="quickStart">+ Opret fag</button>
+        </div>
+      </main>
+
+      <aside class="widgets-panel" id="widgetsPanel">
+        <div class="widgets-empty">Åbn et dokument, så tilpasses sidepanelet dit fag.</div>
+      </aside>
+    </div>
+  </div>
+
+  <section class="ide-terminal" aria-label="Terminal">
+    <div class="terminal-tabs">
+      <button type="button" class="active" data-terminal-tab="terminal">TERMINAL</button>
+      <button type="button" data-terminal-tab="output">OUTPUT</button>
+      <button type="button" data-terminal-tab="problems">PROBLEMER</button>
+      <button type="button" data-terminal-tab="debug">DEBUG CONSOLE</button>
+      <span class="terminal-spacer"></span>
+      <span>zsh</span>
+      <button type="button" id="terminalNewSnippet" title="Nyt kodeeksempel">+</button>
+      <button type="button" id="terminalInsertCode" title="Indsæt i note">□</button>
+      <button type="button" id="terminalClear" title="Ryd terminal">⋯</button>
+    </div>
+    <div class="terminal-console">
+      <pre id="ideTerminalOutput"><b>Note'it study workspace på main</b>
+➜ noteit-workspace git:(main) ✕ nit preview
+Server kører på http://localhost:5173
+✓ Bygget færdig på 328ms</pre>
+      <form class="terminal-input-row" id="ideTerminalForm">
+        <span>➜</span>
+        <textarea id="ideTerminalInput" spellcheck="false" placeholder="Skriv kommando eller kode... fx console.log('Hello, world!')"></textarea>
+        <button type="submit">Kør</button>
+      </form>
+    </div>
+  </section>
+
+  <footer class="ide-statusbar">
+    <span>main</span>
+    <span>○ 0</span>
+    <span>△ 0</span>
+    <span class="statusbar-spacer"></span>
+    <span><i></i> Live Preview</span>
+    <span>Zen</span>
+    <span>UTF-8</span>
+    <span>LF</span>
+    <span>Markdown</span>
+  </footer>
+</div>
+
+<div class="selection-helper" id="selectionHelper">
+  <button type="button" data-selection-action="explain">Forklar</button>
+  <button type="button" data-selection-action="summarize">Lav et overblik</button>
+  <button type="button" data-selection-action="questions">Lav træningsspørgsmål</button>
+  <button type="button" data-selection-action="proofread">Omskriv tekst</button>
+  <button type="button" data-selection-action="understood">Tjek min forståelse</button>
+  <button type="button" data-selection-action="flash">Flashcard</button>
+</div>
+
+<div class="offline-badge" id="offlineBadge">📡 Offline, dine noter gemmes lokalt</div>
+
+<!-- ═══════════ DIALOGS ═══════════ -->
+<dialog id="subjectDialog">
+  <form class="modal" id="subjectForm">
+    <div class="modal-head"><h2 id="subjectDialogTitle">Start fag</h2><button type="button" class="modal-close" data-close="subject">×</button></div>
+    <p class="hint" id="subjectDialogHint">Faget lægges ind som et separat papir i den aktive notesbog og bliver automatisk organiseret under Noter+.</p>
+    <div class="field"><label for="subjectName" id="subjectNameLabel">Fag</label><input id="subjectName" required placeholder="Fx Matematik"></div>
+    <div class="field"><label id="subjectColorLabel">Fagfarve</label><div class="colors" id="subjectColors"></div></div>
+    <div class="modal-actions"><button type="button" class="btn-outline" data-close="subject" id="subjectCancel">Annuller</button><button type="submit" class="btn-primary" id="subjectSubmit">Opret fag</button></div>
+  </form>
+</dialog>
+
+<dialog id="notebookDialog">
+  <form class="modal" id="notebookForm">
+    <div class="modal-head"><h2>Start notesbog</h2><button type="button" class="modal-close" data-close="notebook">×</button></div>
+    <div class="field"><label for="notebookName">Navn på uddannelse</label><input id="notebookName" required placeholder="Fx Datalogi"></div>
+    <div class="field"><label for="notebookEducation">Uddannelse</label>
+      <select id="notebookEducation"></select>
+    </div>
+    <div class="field hidden" id="notebookLevelField"><label for="notebookLevel">År eller semester</label><select id="notebookLevel"></select></div>
+    <div class="field"><label>Farve på notesbogen</label><div class="colors" id="notebookColors"></div></div>
+    <div class="modal-actions"><button type="button" class="btn-outline" data-close="notebook">Annuller</button><button type="submit" class="btn-primary">Gem notesbog</button></div>
+  </form>
+</dialog>
+
+<dialog id="stickyDialog">
+  <form class="modal" id="stickyForm">
+    <div class="modal-head"><h2>Ny sticky note</h2><button type="button" class="modal-close" data-close="sticky">×</button></div>
+    <p class="hint">Vælg udseendet først. Bagefter kan sedlen trækkes rundt på notearket og slettes med krydset.</p>
+    <div class="field"><label>Farve</label><div class="sticky-choice-grid" id="stickyColors"></div></div>
+    <div class="field"><label for="stickySize">Størrelse</label>
+      <select id="stickySize"><option value="small">Lille</option><option value="medium" selected>Mellem</option><option value="large">Stor</option></select>
+    </div>
+    <div class="modal-actions"><button type="button" class="btn-outline" data-close="sticky">Annuller</button><button type="submit" class="btn-primary">Indsæt sticky note</button></div>
+  </form>
+</dialog>
+
+<dialog id="codeDialog">
+  <form class="modal" id="codeForm">
+    <div class="modal-head"><h2>Indsæt kodestykke</h2><button type="button" class="modal-close" data-close="code">×</button></div>
+    <div class="code-meta-grid">
+      <div class="field"><label for="language">Sprog</label>
+        <select id="language"><option>JavaScript</option><option>TypeScript</option><option>Python</option><option>R</option><option>MATLAB</option><option>Julia</option><option>C</option><option>C++</option><option>C#</option><option>Java</option><option>Kotlin</option><option>Swift</option><option>Rust</option><option>Go</option><option>Ruby</option><option>PHP</option><option>Dart</option><option>Scala</option><option>Haskell</option><option>Lua</option><option>Bash</option><option>PowerShell</option><option>SQL</option><option>HTML</option><option>CSS</option><option>Arduino</option><option>ESP32</option><option>ROS / Python</option><option>Verilog</option><option>VHDL</option><option>Assembly</option><option>Solidity</option><option>Andet</option></select>
+      </div>
+      <div class="field"><label for="codeLibraries">Libraries og pakker</label><input id="codeLibraries" placeholder="Fx NumPy, React, Eigen, pandas"></div>
+    </div>
+    <div class="code-language-strip" id="codeLanguageStrip" aria-label="Alle kodesprog"></div>
+    <div class="field"><label for="codeInput">Din kode</label><textarea id="codeInput" spellcheck="false" placeholder="Skriv eller indsæt kode her..."></textarea></div>
+    <div class="code-action-row"><button type="button" class="btn-outline" id="fixCode">Ret kode</button><button type="button" class="btn-outline" id="explainCode">Forklar kode</button><button type="button" class="btn-primary" id="runCode">Kør / kompilér</button></div>
+    <div class="ai-result" id="aiResult"></div>
+    <div class="modal-actions"><button type="button" class="btn-outline" data-close="code">Annuller</button><button type="submit" class="btn-primary">Indsæt i noter</button></div>
+  </form>
+</dialog>
+
+<dialog id="aiDialog">
+  <form class="modal" id="aiForm">
+    <div class="modal-head"><h2>Studiehjælp</h2><button type="button" class="modal-close" data-close="ai">×</button></div>
+    <p class="hint">Vælg linjerne fra din note, som Note'it skal arbejde med.</p>
+    <div class="line-preview" id="linePreview"></div>
+    <div class="line-fields">
+      <div class="field"><label for="lineFrom">Fra linje</label><input id="lineFrom" type="number" min="1" value="1"></div>
+      <div class="field"><label for="lineTo">Til linje</label><input id="lineTo" type="number" min="1" value="1"></div>
+    </div>
+    <div class="field"><label for="aiAction">Hvad skal Studiehjælp gøre?</label>
+      <select id="aiAction">
+        <option value="explain">Forklar teknisk og uddyb</option>
+        <option value="proofread">Ret teknisk rapporttekst</option>
+        <option value="summarize">Lav teknisk resumé</option>
+        <option value="questions">Lav eksamensspørgsmål</option>
+        <option value="understood">Tjek om jeg har forstået det</option>
+        <option value="derive">Gennemgå matematisk udledning</option>
+        <option value="debug">Find fejl i kode eller beregning</option>
+      </select>
+    </div>
+    <div class="ai-result" id="noteAiResult"></div>
+    <div class="modal-actions"><button type="button" class="btn-outline" data-close="ai">Annuller</button><button type="submit" class="btn-primary">Lav svar</button></div>
+  </form>
+</dialog>
+
+<dialog id="pdfDialog" class="pdf-lab-dialog">
+  <form class="modal" id="pdfForm">
+    <div class="modal-head">
+      <div><span class="engineering-tag">PDF → STUDIEMATERIALE</span><h2>PDF-værksted</h2></div>
+      <button type="button" class="modal-close" data-close="pdf">×</button>
+    </div>
+    <div class="pdf-flow"><span>Upload</span><b>→</b><span>Maks. 6 sider</span><b>→</b><span>Læs sidevis</span><b>→</b><span>Studienoter med sidetal</span></div>
+    <div class="pdf-source-tabs">
+      <button type="button" class="pdf-source-tab active" data-pdf-source="file">Indsæt PDF</button>
+      <button type="button" class="pdf-source-tab" data-pdf-source="text">Kopiér tekst ind</button>
+    </div>
+    <div id="pdfFileSource">
+      <div class="field"><label for="pdfFile">Bog, artikel eller kompendium</label><input id="pdfFile" type="file" accept="application/pdf"></div>
+    </div>
+    <div id="pdfTextSource" class="hidden">
+      <div class="field"><label for="pdfCopiedText">Tekst</label><textarea id="pdfCopiedText" placeholder="Indsæt teksten her..."></textarea></div>
+    </div>
+    <div class="pdf-options-grid">
+      <div class="field"><label for="pdfOutputType">Hvad skal laves?</label>
+        <select id="pdfOutputType">
+          <option value="notes">Studienoter</option>
+          <option value="flashcards">Flashcards</option>
+          <option value="quiz">Quiz</option>
+          <option value="quote">Citat med sidetal</option>
+          <option value="misconceptions">Misforståelses-detektor</option>
+        </select>
+      </div>
+      <div class="field"><label for="pdfClassLevel">Klassetrin</label>
+        <select id="pdfClassLevel"><option value="folkeskole">Folkeskole</option><option value="gymnasium">Gymnasium</option><option value="universitet" selected>Universitet</option></select>
+      </div>
+    </div>
+    <div class="field"><label for="quoteTopic">Fokus eller emne</label><input id="quoteTopic" placeholder="Fx Fourier transform, cellemembran eller hele teksten"></div>
+    <div class="field"><label for="citationAuthor">Kilde / titel (valgfrit)</label><input id="citationAuthor" placeholder="Fx Hansen, Signalanalyse"></div>
+    <div class="pdf-status" id="pdfStatus">PDF-filer læses side for side og må højst indeholde 6 sider.</div>
+    <div class="ai-result pdf-result" id="quoteResult"></div>
+    <div class="modal-actions"><button type="button" class="btn-outline" data-close="pdf">Annuller</button><button type="submit" class="btn-primary" id="scanPdf">Lav studiemateriale</button></div>
+  </form>
+</dialog>
+
+<dialog id="settingsDialog">
+  <form class="modal" id="settingsForm">
+    <div class="modal-head"><h2>Indstillinger</h2><button type="button" class="modal-close" data-close="settings">×</button></div>
+    <div class="secure-help-status"><strong>Sikker studiehjælp</strong><span>Forespørgsler sendes via appens server. Din API nøgle gemmes aldrig i browseren.</span></div>
+    <div class="language-box">
+      <div class="field study-field-field"><label for="studyFieldSetting">Primært studieområde</label><div id="settingsStudyFieldGrid" class="study-field-picker"></div><select id="studyFieldSetting" hidden aria-hidden="true"></select></div>
+      <div class="field"><label for="countrySetting">Land</label><select id="countrySetting"></select></div>
+      <div class="field"><label for="interfaceLanguage">Menusprog</label><select id="interfaceLanguage"></select></div>
+      <div class="field"><label for="defaultNoteLanguage">Standardsprog i noter</label><select id="defaultNoteLanguage"></select></div>
+    </div>
+    <label class="settings-check"><input type="checkbox" id="autoCorrectSetting"> Ret automatisk stavefejl direkte i teksten</label>
+    <p class="hint">Hvis serverforbindelsen ikke er tilgængelig, bruges en enkel lokal hjælpetilstand uden at sende dine noter videre. Status vises øverst i appen.</p>
+    <div class="settings-storage-info">
+      <div class="settings-row"><span>Noter og plan</span><strong id="settingsStorageMode">Gemmes lokalt på denne enhed</strong></div>
+      <div class="settings-row"><span>Synkronisering</span><strong id="settingsSyncMode">Ingen cloud-sync endnu — log ind for at gemme på profil</strong></div>
+      <div class="settings-row"><span>Studiehjælp</span><strong id="settingsStudyHelpMode">Online via sikker server</strong></div>
+    </div>
+    <div class="api-connector-box">
+      <div class="field"><label for="apiBaseSetting">API-base til Cursor</label><input id="apiBaseSetting" type="url" placeholder="https://din-noteit-server.dk"></div>
+      <div class="settings-row"><span>Cursor endpoint</span><strong id="cursorApiEndpoint">/api/study-help</strong></div>
+      <div class="api-actions"><button type="button" class="btn-outline" id="copyCursorEndpoint">Kopiér endpoint</button></div>
+    </div>
+    <div class="settings-row fixed-setting"><span>Studiemodel</span><strong id="fixedStudyModel">Administreres sikkert af Note'it</strong></div>
+    <div class="settings-row fixed-setting"><span>Appversion</span><strong id="fixedAppVersion">2.26.0</strong></div>
+    <div class="modal-actions"><button type="button" class="btn-outline" data-close="settings">Annuller</button><button type="submit" class="btn-primary">Gem indstillinger</button></div>
+  </form>
+</dialog>
+
+<dialog id="onboardingDialog" class="onboarding-dialog">
+  <div class="classroom-guide">
+    <div class="classroom-frame">
+      <div class="classroom-wood-top" aria-hidden="true"></div>
+      <div class="classroom-ledge" aria-hidden="true">
+        <span class="chalk-piece chalk-white"></span>
+        <span class="chalk-piece chalk-yellow"></span>
+        <span class="chalk-piece chalk-pink"></span>
+        <span class="chalk-piece chalk-blue"></span>
+        <span class="board-eraser"></span>
+        <span class="board-ruler"></span>
+      </div>
+
+      <div id="onboardingIntro" class="chalkboard-panel">
+        <div class="chalk-dust" aria-hidden="true"></div>
+        <div class="chalk-intro-art" id="onboardingIntroArt" aria-hidden="true"></div>
+        <p class="chalk-kicker">Velkommen</p>
+        <h2 class="chalk-title-xl">Note<sup>'it</sup> skole-tavlen</h2>
+        <p class="chalk-sub">Kort guide til notesbog, noter og eksamen.</p>
+        <div class="chalk-intro-cards">
+          <button type="button" class="chalk-card" data-chalk-preview="notebook"><span>📚</span><b>Notesbog</b><small>Opret fag</small></button>
+          <button type="button" class="chalk-card" data-chalk-preview="paper"><span>📄</span><b>Noter</b><small>Tryk +</small></button>
+        </div>
+        <div class="chalk-intro-actions">
+          <button type="button" class="chalk-btn chalk-btn-primary" id="onboardingStartGuide">▶ Se guiden</button>
+          <button type="button" class="chalk-btn chalk-btn-ghost" id="onboardingDismiss">Luk</button>
+        </div>
+        <p class="chalk-footnote">Find guiden igen under <strong>Vis introduktion</strong></p>
+      </div>
+
+      <div id="onboardingGuide" class="chalkboard-panel hidden">
+        <div class="chalk-dust" aria-hidden="true"></div>
+        <header class="chalkboard-header">
+          <span class="chalk-lesson-tag">Trin <strong id="onboardingStepNum">1</strong> / <span id="onboardingStepTotal">5</span></span>
+          <h2 id="onboardingGuideTitle" class="chalk-title">Kom i gang</h2>
+          <button type="button" class="chalk-close" id="onboardingCloseGuide" aria-label="Afslut guide">×</button>
+        </header>
+        <div class="chalkboard-stage">
+          <div class="chalk-illustration-wrap">
+            <div id="onboardingIllustration" class="chalk-illustration" aria-hidden="true"></div>
+            <div class="chalk-pointer" aria-hidden="true"></div>
+          </div>
+          <div id="onboardingStepBody" class="chalk-notes"></div>
+        </div>
+        <div class="chalk-progress-row">
+          <div class="onboarding-progress" id="onboardingProgress" aria-label="Fremdrift"></div>
+        </div>
+        <footer class="chalkboard-footer">
+          <button type="button" class="chalk-btn chalk-btn-ghost" id="onboardingPrev" disabled>← Tilbage</button>
+          <button type="button" class="chalk-btn chalk-btn-ghost" id="onboardingDismissGuide">Afslut</button>
+          <button type="button" class="chalk-btn chalk-btn-primary" id="onboardingNext">Næste →</button>
+        </footer>
+      </div>
+
+      <div class="classroom-wood-bottom" aria-hidden="true"></div>
+    </div>
+  </div>
+</dialog>
+
+<dialog id="welcomeDialog" class="auth-dialog">
+  <div class="modal">
+    <button type="button" class="auth-close" id="closeAuthDialog" aria-label="Luk">×</button>
+    <div class="auth-brand">Note<sup>'it</sup></div>
+    <div class="auth-tabs"><button type="button" class="active" data-auth-tab="login">Log ind</button><button type="button" data-auth-tab="signup">Opret bruger</button></div>
+    <form id="loginForm" class="auth-panel active" data-auth-panel="login">
+      <h2>Velkommen tilbage</h2><p>Log ind for at åbne din notesbog.</p>
+      <div class="field"><label for="loginEmail">E-mail</label><input id="loginEmail" type="email" required autocomplete="username"></div>
+      <div class="field"><label for="loginPassword">Adgangskode</label><input id="loginPassword" type="password" required autocomplete="current-password"></div>
+      <label class="auth-remember"><input id="loginRememberEmail" type="checkbox"> Gem mine oplysninger</label>
+      <div class="auth-error" id="loginError"></div>
+      <button class="btn-primary auth-submit" type="submit">Log ind</button>
+      <button class="auth-forgot" id="forgotPassword" type="button">Glemt adgangskode?</button>
+    </form>
+    <form id="signupForm" class="auth-panel" data-auth-panel="signup">
+      <h2>Opret din profil</h2><p>Land og sprog gemmes på din profil.</p>
+      <div class="auth-form-grid">
+        <div class="field"><label for="signupName">Navn</label><input id="signupName" required></div>
+        <div class="field"><label for="signupEmail">E-mail</label><input id="signupEmail" type="email" required></div>
+        <div class="field"><label for="signupPassword">Adgangskode</label><input id="signupPassword" type="password" minlength="8" required></div>
+        <div class="field study-field-field"><label for="signupStudyField">Hvad læser du?</label><div id="signupStudyFieldGrid" class="study-field-picker"></div><select id="signupStudyField" hidden aria-hidden="true"></select></div>
+        <div class="field"><label for="signupCountry">Land</label><select id="signupCountry"></select></div>
+        <div class="field"><label for="signupInterfaceLanguage">Sprog i appen</label><select id="signupInterfaceLanguage"></select></div>
+        <div class="field"><label for="signupNoteLanguage">Notesprog</label><select id="signupNoteLanguage"></select></div>
+      </div>
+      <div class="auth-error" id="signupError"></div>
+      <button class="btn-primary auth-submit" type="submit">Opret bruger og fortsæt</button>
+    </form>
+    <div class="guest-access">
+      <button type="button" id="continueGuest">Fortsæt som gæst</button>
+      <p>Udforsk alle funktioner frit. Du skal logge ind eller oprette en bruger for at gemme dit arbejde sikkert.</p>
+    </div>
+  </div>
+</dialog>
+
+<dialog id="passwordResetDialog" class="auth-dialog">
+  <form class="modal password-reset-modal" id="passwordResetForm">
+    <div class="modal-head">
+      <div><span class="engineering-tag">KONTOSIKKERHED</span><h2>Nulstil adgangskode</h2></div>
+      <button type="button" class="modal-close" data-close="passwordReset">×</button>
+    </div>
+    <p>Indtast den e-mail, profilen blev oprettet med. Af sikkerhedshensyn ændres adgangskoden kun gennem et tidsbegrænset link sendt fra Note'it.</p>
+    <div class="field"><label for="resetEmail">E-mail</label><input id="resetEmail" type="email" required autocomplete="email"></div>
+    <div id="resetCompletionFields" class="hidden">
+      <div class="field"><label for="resetPassword">Ny adgangskode</label><input id="resetPassword" type="password" minlength="8" autocomplete="new-password"></div>
+      <div class="field"><label for="resetPasswordConfirm">Gentag adgangskode</label><input id="resetPasswordConfirm" type="password" minlength="8" autocomplete="new-password"></div>
+    </div>
+    <div class="auth-error" id="resetError"></div>
+    <div class="auth-success" id="resetSuccess"></div>
+    <button type="button" class="btn-outline reset-mail-button" id="sendResetEmail">Send nulstillingsmail</button>
+    <div class="modal-actions">
+      <button type="button" class="btn-outline" data-close="passwordReset">Annuller</button>
+      <button type="submit" class="btn-primary hidden" id="completePasswordReset">Nulstil adgangskode</button>
+    </div>
+  </form>
+</dialog>
+
+<dialog id="toolPacksDialog">
+  <form class="modal" id="toolPacksForm">
+    <div class="modal-head"><div><span class="engineering-tag">TILPAS DIN NOTE</span><h2>Vælg værktøjspakker</h2></div><button type="button" class="modal-close" data-close="toolPacks">×</button></div>
+    <p class="hint">Kombinér frit. En økonominote kan eksempelvis også bruge statistik fra STEM eller kildeanalyse fra humaniora.</p>
+    <div class="tool-pack-grid" id="toolPackChoices"></div>
+    <div class="modal-actions"><button type="button" class="btn-outline" data-close="toolPacks">Annuller</button><button type="submit" class="btn-primary">Anvend værktøjer</button></div>
+  </form>
+</dialog>
+
+<div class="guest-save-notice" id="guestSaveNotice" role="status">
+  <div><strong>Vil du gemme dit arbejde?</strong><span>Gæsteændringer er kun midlertidige.</span></div>
+  <button type="button" data-guest-auth="login">Log ind</button>
+  <button type="button" class="primary" data-guest-auth="signup">Opret bruger</button>
+</div>
+
+<dialog id="groupDialog" class="workspace-dialog">
+  <div class="modal">
+    <div class="modal-head"><div><span class="engineering-tag">PREMIUM · FÆLLES STUDIERUM</span><h2 data-ui="groupWork">Gruppearbejde</h2><p class="modal-subtitle">Vælg, hvordan gruppen skal arbejde lige nu.</p></div><button type="button" class="modal-close" data-close="group">×</button></div>
+    <div class="visual-work-hub group-hub">
+      <button data-group-hub="new"><span class="hub-figure people-figure"><i></i><i></i><i></i></span><b>Start gruppe</b><small>Navne, deltagere og invitation</small></button>
+      <button data-group-hub="brainstorm"><span class="hub-figure brain-figure">⌁</span><b>Brainstorm</b><small>Alle lægger idéer ind samtidig</small></button>
+      <button data-group-hub="board"><span class="hub-figure paper-figure">▤</span><b>Opslagstavle</b><small>Sæt fælles sedler op</small></button>
+      <button data-group-hub="quiz"><span class="hub-figure cards-figure"><i>A</i><i>B</i><i>C</i></span><b>Gruppequiz</b><small>Test hinanden på pensum</small></button>
+      <button data-group-hub="roles"><span class="hub-figure orbit-figure">◎</span><b>Roller</b><small>Fordel ansvar og ejerskab</small></button>
+      <button data-group-hub="meeting"><span class="hub-figure calendar-figure">17</span><b>Mødeplan</b><small>Dagsorden og beslutninger</small></button>
+      <button data-group-hub="tasks"><span class="hub-figure board-figure">✓</span><b>Opgavetavle</b><small>Hvem gør hvad og hvornår?</small></button>
+      <button data-group-hub="overview"><span class="hub-figure map-figure">↗</span><b>Gruppeoverblik</b><small>Fremdrift, idéer og næste skridt</small></button>
+      <button data-group-hub="sources"><span class="hub-figure sources-figure">Aa</span><b>Fælles kilder</b><small>Saml links, bøger og referencer</small></button>
+      <button data-group-hub="decisions"><span class="hub-figure decision-figure">✓</span><b>Beslutningslog</b><small>Gem valg, begrundelser og ansvar</small></button>
+      <button data-group-hub="feedback"><span class="hub-figure feedback-figure">↔</span><b>Peer feedback</b><small>Giv struktureret respons til hinanden</small></button>
+      <button data-group-hub="files"><span class="hub-figure files-figure">▱</span><b>Fælles filer</b><small>Tilføj materialer til gruppens rum</small></button>
+    </div>
+    <div class="collab-layout">
+      <aside><button class="btn-primary" id="newGroup">+ Ny studiegruppe</button><div id="groupList"></div></aside>
+      <section id="groupWorkspace"><div class="empty-list">Opret eller vælg en gruppe.</div></section>
+    </div>
+  </div>
+</dialog>
+
+<dialog id="projectDialog" class="workspace-dialog">
+  <div class="modal">
+    <div class="modal-head"><div><span class="engineering-tag">PREMIUM · PROJEKTSTUDIE</span><h2>Projektarbejde</h2><p class="modal-subtitle">Fra første idé til færdig aflevering.</p></div><button type="button" class="modal-close" data-close="project">×</button></div>
+    <div class="visual-work-hub project-hub">
+      <button data-project-hub="upload"><span class="hub-figure upload-figure">↑</span><b>Upload projekt</b><small>Saml brief, krav og materiale</small></button>
+      <button data-project-hub="brainstorm"><span class="hub-figure brain-figure">⌁</span><b>Brainstorm</b><small>Udforsk retninger før start</small></button>
+      <button data-project-hub="milestones"><span class="hub-figure steps-figure"><i></i><i></i><i></i></span><b>Milepæle</b><small>Planlæg leverancer og deadlines</small></button>
+      <button data-project-hub="kanban"><span class="hub-figure kanban-figure"><i></i><i></i><i></i></span><b>Kanban</b><small>To do, i gang og færdig</small></button>
+      <button data-project-hub="research"><span class="hub-figure search-figure">⌕</span><b>Research</b><small>Kilder, fund og dokumentation</small></button>
+      <button data-project-hub="risks"><span class="hub-figure risk-figure">!</span><b>Risici</b><small>Antagelser, problemer og plan B</small></button>
+      <button data-project-hub="team"><span class="hub-figure people-figure"><i></i><i></i><i></i></span><b>Projektgruppe</b><small>Deltagere, roller og møder</small></button>
+      <button data-project-hub="report"><span class="hub-figure report-figure">¶</span><b>Rapportbygger</b><small>Struktur, metode og konklusion</small></button>
+    </div>
+    <section id="projectWorkspace"></section>
+  </div>
+</dialog>
+
+<dialog id="premiumDialog" class="premium-dialog">
+  <div class="modal">
+    <div class="modal-head"><div><span class="engineering-tag">NOTE'IT PREMIUM</span><h2>Få adgang til alle studieværktøjer</h2><p class="modal-subtitle">Studiehjælp, ekstra værktøjer, ubegrænset PDF, grupper og projekter kræver Premium.</p></div><button type="button" class="modal-close" data-close="premium">×</button></div>
+    <div class="premium-plan-grid">
+      <article class="premium-plan featured"><span>Mest fleksibel</span><h3>39 kr.</h3><p>pr. måned</p><ul><li>Gruppearbejde i realtid</li><li>Projektværksteder</li><li>Fælles filer, quizzer og brainstorm</li></ul><button type="button" class="btn-primary" data-activate-premium="monthly">Vælg månedsabonnement</button></article>
+      <article class="premium-plan"><span>Mest værdi</span><h3>179 kr.</h3><p>for 6 måneder</p><ul><li>Alle Premium funktioner</li><li>Et halvt års fuld adgang</li><li>Ingen månedlig fornyelse</li></ul><button type="button" class="btn-outline" data-activate-premium="semester">Vælg 6 måneder</button></article>
+    </div>
+    <div class="premium-code-box">
+      <label for="premiumCode">Har du en adgangs eller rabatkode?</label>
+      <div><input id="premiumCode" autocomplete="off" placeholder="Indtast kode"><button type="button" class="btn-outline" id="redeemPremiumCode">Aktivér kode</button></div>
+      <small id="premiumCodeFeedback"></small>
+    </div>
+    <p class="premium-login-hint" id="premiumLoginHint">Abonnementet knyttes til din profil.</p>
+  </div>
+</dialog>
+
+<dialog id="noteExamModeDialog" class="note-exam-mode-dialog">
+  <div class="note-exam-shell">
+    <header>
+      <div><span>EKSAMENSMODE</span><h2 id="noteExamModeTitle">Træn på denne note</h2></div>
+      <button type="button" class="exam-mode-exit" id="exitNoteExamMode">Afslut eksamensmode</button>
+    </header>
+    <p class="exam-mode-guidance">Vil du lave en eksamensplan, indsætte litteratur eller træne på tværs af flere noter, skal du gå til <button type="button" id="goToFullExamTraining">Eksamenstræning</button>.</p>
+    <div class="note-exam-progress"><span id="noteExamProgressText"></span><i><b id="noteExamProgressBar"></b></i></div>
+    <main id="noteExamCard"></main>
+    <footer>
+      <button type="button" class="btn-outline" id="previousNoteExamCard">Forrige</button>
+      <button type="button" class="btn-primary" id="revealNoteExamCard">Vis svar</button>
+      <button type="button" class="btn-outline" id="nextNoteExamCard">Næste</button>
+    </footer>
+  </div>
+</dialog>
+
+<dialog id="examPrepDialog" class="workspace-dialog">
+  <div class="modal">
+    <div class="exam-prep-overview"></div>
+    <section id="examPrepWorkspace" class="exam-prep-workspace" hidden></section>
+    <div class="exam-prep-legacy" hidden aria-hidden="true">
+    <div class="reward-strip" id="rewardStrip"></div>
+    <section class="drawn-topic-search">
+      <div>
+        <span class="engineering-tag">MUNDTLIG EKSAMEN</span>
+        <h3>Hvad emne trak jeg?</h3>
+        <p>Skriv emnet, så finder Note'it de noter, der handler mest om det.</p>
+      </div>
+      <div class="drawn-topic-controls">
+        <input id="drawnExamTopic" placeholder="Fx Fourier transformation, EU ret eller proteinsyntese">
+        <button type="button" class="btn-primary" id="findDrawnTopicNotes">Find mine noter</button>
+      </div>
+      <div id="drawnTopicNotesResult" class="drawn-topic-results"></div>
+    </section>
+    <div class="prep-folder-bar">
+      <div><strong>Gemte mapper</strong><div id="examPrepFolders" class="prep-folder-list"></div></div>
+      <button class="btn-outline" id="newExamFolder">+ Ny mappe</button>
+    </div>
+    <div id="examPrepSubjects" class="prep-subjects"></div>
+    <div class="exam-training-options">
+      <label><input type="radio" name="examTrainingMode" value="mixed" checked><span>Blandet test</span></label>
+      <label><input type="radio" name="examTrainingMode" value="flashcards"><span>Flashcards</span></label>
+      <label><input type="radio" name="examTrainingMode" value="written"><span>Skriv forklaring</span></label>
+    </div>
+    <div class="modal-actions prep-actions"><button class="btn-outline" id="saveExamFolder">Gem valgte i mappe</button><button class="btn-primary" id="generateExamPrep">Start test</button></div>
+    <div id="examPrepResult" class="prep-result"></div>
+    </div>
+  </div>
+</dialog>
+
+<dialog id="examDialog" class="exam-dialog workspace-dialog">
+  <div class="modal">
+    <div class="exam-plan-overview">
+    <div id="examPlanDashboard" class="exam-plan-dashboard" hidden></div>
+    <div class="exam-plan-builder-section">
+    <div class="modal-head"><div><span class="engineering-tag">LÆSEPLAN</span><h2>Eksamensplan</h2><p class="modal-subtitle">Fordel emner på dage og kryds læseopgaver af.</p></div><button type="button" class="modal-close" data-close="exam">×</button></div>
+    <div class="exam-plan-features">
+      <button type="button" data-exam-feature="priority"><span>◎</span><b>Prioritér pensum</b><small>Vigtigt, svært og snart</small></button>
+      <button type="button" data-exam-feature="buffer"><span>◫</span><b>Bufferdage</b><small>Plads til sygdom og forsinkelser</small></button>
+      <button type="button" data-exam-feature="oral"><span>◉</span><b>Mundtlig plan</b><small>Disposition og trækningsspørgsmål</small></button>
+      <button type="button" data-exam-feature="status"><span>↗</span><b>Pensumdækning</b><small>Se hvad der mangler noter</small></button>
+    </div>
+    <div id="examSubjectCards" class="exam-subject-cards"></div>
+    <div class="exam-layout">
+      <section class="exam-builder">
+        <h3>Opret din eksamensperiode</h3>
+        <p class="hint">Vælg din første læseferiedag, tilføj fag og angiv eksamensdatoen for hvert fag.</p>
+        <div class="field"><label for="planStart">Læseferie dato *</label><input id="planStart" type="date" required></div>
+        <button class="add-btn" id="addExamSubject">+ Tilføj eksamensfag</button>
+        <div id="examSubjects"></div>
+        <button class="btn-primary" id="generatePlan">Lav eksamensplan</button>
+      </section>
+      <section>
+        <div class="exam-tools">
+          <div class="exam-view-switch" role="group" aria-label="Visning af eksamensplan">
+            <button type="button" class="btn-outline active" data-exam-plan-view="checklist">Læseoversigt</button>
+            <button type="button" class="btn-outline" data-exam-plan-view="calendar">Kalender</button>
+          </div>
+          <button class="btn-outline" id="exportExamPlan">Download plan</button>
+        </div>
+        <div class="exam-progress"><div id="examProgressBar"></div></div>
+        <p class="hint" id="examProgressText">Ingen plan endnu</p>
+        <div id="examPlan"></div>
+      </section>
+    </div>
+    </div>
+    </div>
+    <section id="examPlanWorkspace" class="exam-plan-workspace" hidden></section>
+  </div>
+</dialog>
+
+<dialog id="examSubjectDialog">
+  <form class="modal" id="examSubjectForm">
+    <div class="modal-head"><h2>Nyt eksamensfag</h2><button type="button" class="modal-close" data-close="examSubject">×</button></div>
+    <div class="exam-date-stack">
+      <div class="field"><label for="examNotebookSubject">Fag *</label><select id="examNotebookSubject" required></select></div>
+      <div class="field"><label for="examDate">Eksamensdato *</label><input id="examDate" type="date" required></div>
+      <div class="field"><label for="reexamDate">Reeksamensdato (valgfri)</label><input id="reexamDate" type="date"></div>
+    </div>
+    <div class="field"><label>Lav planen ud fra</label>
+      <div class="curriculum-source-picker">
+        <label><input type="radio" name="curriculumSource" value="notes" checked><span>Dine noter</span></label>
+        <label><input type="radio" name="curriculumSource" value="files"><span>Uploadet litteratur</span></label>
+        <label><input type="radio" name="curriculumSource" value="both"><span>Noter + litteratur</span></label>
+      </div>
+    </div>
+    <div class="field exam-file-field"><span>Pensum, litteratur eller kursusfiler</span><label class="exam-file-picker" id="examLitDrop">Træk PDF her eller vælg filer<input id="examFiles" type="file" accept=".pdf,application/pdf" multiple></label><small>Du kan vælge højst 5 PDF-filer pr. fag.</small><div id="examFileList" class="exam-file-list"></div></div>
+    <label class="exam-question-toggle"><input id="autoExamQuestions" type="checkbox"><span>Lav eventuelle eksamensspørgsmål ud fra noter og filer</span></label>
+    <div class="modal-actions"><button type="button" class="btn-outline" data-close="examSubject">Annuller</button><button type="submit" class="btn-primary">Tilføj og lav eksamensplan</button></div>
+  </form>
+</dialog>
+
+<dialog id="mathDialog">
+  <form class="modal" id="mathForm">
+    <div class="modal-head"><h2>LaTeX ligning</h2><button type="button" class="modal-close" data-close="math">×</button></div>
+    <div class="field"><label for="mathInput">Skriv LaTeX</label><input id="mathInput" placeholder="Fx f(x) = x^2" autocomplete="off"></div>
+    <div class="math-block" id="mathPreview" style="min-height:50px"></div>
+    <div class="modal-actions"><button type="button" class="btn-outline" data-close="math">Annuller</button><button type="submit" class="btn-primary">Indsæt ligning</button></div>
+  </form>
+</dialog>
+
+<dialog id="drawingDialog" class="engineering-dialog">
+  <div class="modal">
+    <div class="modal-head"><h2>Tegn i noten</h2><button type="button" class="modal-close" data-close="drawing">×</button></div>
+    <div class="drawing-tools">
+      <input class="color-tool" id="drawColor" type="color" value="#1a1a2e">
+      <select id="drawWidth" class="font-select"><option value="1">1 px</option><option value="2" selected>2 px</option><option value="4">4 px</option><option value="7">7 px</option></select>
+      <button class="btn-outline" id="clearDrawing">Ryd</button>
+    </div>
+    <canvas class="drawing-canvas" id="drawingCanvas" width="900" height="430"></canvas>
+    <div class="modal-actions"><button class="btn-primary" id="insertDrawing">Indsæt tegning</button></div>
+  </div>
+</dialog>
+
+<dialog id="graphDialog" class="engineering-dialog">
+  <div class="modal">
+    <div class="modal-head"><h2>Funktionsgraf</h2><button type="button" class="modal-close" data-close="graph">×</button></div>
+    <div class="angle-grid">
+      <div class="field"><label for="graphExpression">f(x)</label><input id="graphExpression" value="sin(x)"></div>
+      <div class="field"><label for="graphRange">x-interval</label><select id="graphRange"><option value="10">minus 10 til 10</option><option value="5">minus 5 til 5</option><option value="20">minus 20 til 20</option></select></div>
+    </div>
+    <canvas class="drawing-canvas" id="graphCanvas" width="900" height="430"></canvas>
+    <div class="modal-actions"><button class="btn-outline" id="plotGraph">Tegn graf</button><button class="btn-primary" id="insertGraph">Indsæt graf</button></div>
+  </div>
+</dialog>
+
+<dialog id="semesterDialog">
+  <form class="modal" id="semesterForm">
+    <div class="modal-head"><h2 data-ui="newSemester">Tilføj semester</h2><button type="button" class="modal-close" data-close="semester">×</button></div>
+    <p class="hint" data-ui="pickSemester">Vælg Bachelor (1 til 6) eller Kandidat/Master (1 til 2)</p>
+    <div class="semester-pick-group">
+      <span class="semester-pick-label" data-ui="bachelor">Bachelor</span>
+      <div class="semester-pick-btns" id="bachelorPicks"></div>
+    </div>
+    <div class="semester-pick-group">
+      <span class="semester-pick-label" data-ui="master">Kandidat</span>
+      <div class="semester-pick-btns" id="masterPicks"></div>
+    </div>
+    <div class="modal-actions"><button type="button" class="btn-outline" data-close="semester" data-ui="cancel">Annuller</button></div>
+  </form>
+</dialog>
+
+<dialog id="pageSetupDialog" class="page-setup-dialog">
+  <form class="modal" id="pageSetupForm">
+    <div class="modal-head"><h2>Ny forelæsning eller lektion</h2><button type="button" class="modal-close" data-close="pageSetup">×</button></div>
+    <p class="hint">Giv noten et navn og vælg fag nedenfor.</p>
+    <div class="field"><label for="pageSetupTitle">Titel på noten</label><input id="pageSetupTitle" required placeholder="Fx Forelæsning 3, kemiske ligevægte"></div>
+    <div class="field doc-palette-field">
+      <label>Vælg fag</label>
+      <div id="docTypeGrid"></div>
+    </div>
+    <div class="field hidden" id="otherTypeField">
+      <label for="pageOtherType">Fag</label>
+      <input id="pageOtherType" maxlength="60">
+    </div>
+    <div class="page-assistance-grid">
+      <div class="field"><label for="pageAutoCorrect">Automatisk retstavning</label>
+        <select id="pageAutoCorrect"><option value="yes" selected>Ja</option><option value="no">Nej</option></select>
+      </div>
+      <div class="understanding-choice"><strong>Faglig feedback</strong><span>Startes kun, når du selv vælger “Tjek min forståelse”. Systemet retter ikke fagligt indhold automatisk.</span></div>
+    </div>
+    <div class="modal-actions"><button type="button" class="btn-outline" data-close="pageSetup">Annuller</button><button type="submit" class="btn-primary">Opret og begynd at skrive</button></div>
+  </form>
+</dialog>
+
+<dialog id="modelDialog" class="model-dialog">
+  <div class="modal model-modal">
+    <div class="modal-head">
+      <div>
+        <span class="engineering-tag">INTERAKTIVT UNIVERSITETS-CANVAS</span>
+        <h2>Modeller opdelt efter fag</h2>
+      </div>
+      <button type="button" class="modal-close" data-close="model">×</button>
+    </div>
+    <div class="model-layout">
+      <aside class="model-library">
+        <p class="model-section-label">MODELTYPE</p>
+        <div id="modelTemplates" class="model-template-list"></div>
+        <p class="model-help">Note'it foreslår automatisk en model ud fra dit fag. Du kan altid vælge en anden.</p>
+      </aside>
+      <section class="model-workspace">
+        <div class="model-toolbar">
+          <div class="model-mode-group">
+            <button type="button" class="model-mode active" data-model-mode="paint">Pensel</button>
+            <button type="button" class="model-mode" data-model-mode="pin">Notepunkt</button>
+          </div>
+          <div class="model-palette" id="modelPalette" aria-label="Modelfarver"></div>
+          <button type="button" class="btn-outline model-reset" id="resetModel">Nulstil</button>
+        </div>
+        <div class="model-stage-wrap">
+          <svg id="modelStage" class="model-stage" viewBox="0 0 720 430" role="img" aria-label="Interaktiv fagmodel"></svg>
+          <div class="model-stage-tip" id="modelStageTip">Vælg penslen og klik på en del for at farvelægge den.</div>
+        </div>
+      </section>
+      <aside class="model-notes">
+        <p class="model-section-label">NOTE TIL MARKERET DEL</p>
+        <div class="model-selected-part" id="modelSelectedPart">Ingen del valgt</div>
+        <textarea id="modelNoteText" rows="4" placeholder="Skriv hvad du vil huske om denne del..."></textarea>
+        <button type="button" class="btn-primary" id="saveModelPin">Gem notepunkt</button>
+        <div class="model-pin-list" id="modelPinList"></div>
+      </aside>
+    </div>
+    <div class="modal-actions">
+      <span class="model-status" id="modelStatus">Modellen gemmes sammen med noten.</span>
+      <button type="button" class="btn-outline" data-close="model">Annuller</button>
+      <button type="button" class="btn-primary" id="insertModel">Indsæt model i noten</button>
+    </div>
+  </div>
+</dialog>
+
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script src="app.js?v=__BUILD__&t=__STAMP__&ui=ide-notes-3"></script>
+</body>
+</html>

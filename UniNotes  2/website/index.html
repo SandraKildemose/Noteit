@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="da">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Note'it</title>
+  <meta name="description" content="Universitetsnotesbog til Mac og Windows.">
+  <meta name="theme-color" content="#f6f1e8">
+  <link rel="icon" href="../assets/icon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Libre+Baskerville:wght@400;700&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="site.css">
+</head>
+<body>
+
+  <div class="bg-glow" aria-hidden="true"></div>
+
+  <div class="shell">
+    <header class="nav">
+      <a class="brand" href="./" aria-label="Note'it">
+        <span class="brand-anim" id="brandLogo">
+          <svg class="brand-svg" viewBox="0 0 108 36" aria-hidden="true">
+            <text x="0" y="28" pathLength="1" class="bw l1">N</text>
+            <text x="14" y="28" pathLength="1" class="bw l2">o</text>
+            <text x="27" y="28" pathLength="1" class="bw l3">t</text>
+            <text x="39" y="28" pathLength="1" class="bw l4">e</text>
+            <text x="55" y="16" pathLength="1" class="bw bw-it l5">'</text>
+            <text x="64" y="20" pathLength="1" class="bw bw-it l6">i</text>
+            <text x="73" y="20" pathLength="1" class="bw bw-it l7">t</text>
+            <g class="brand-pen">
+              <ellipse cx="0" cy="0" rx="1.6" ry="2.2" fill="#377aa6"/>
+              <line x1="0" y1="2" x2="-1" y2="7" stroke="#65584d" stroke-width="1.2" stroke-linecap="round"/>
+            </g>
+          </svg>
+        </span>
+      </a>
+      <div class="nav-right">
+        <label class="lang-pick">
+          <select id="siteLang" aria-label="Sprog"></select>
+        </label>
+        <a class="nav-cta" href="#hent" data-i18n="download">Hent</a>
+      </div>
+    </header>
+
+    <main class="main">
+      <div class="hero-head">
+        <h1 data-i18n="headline">Skriv noter. Lær på samme tid.</h1>
+        <p class="sub" data-i18n="sub">Notér og lær</p>
+      </div>
+
+      <div class="board" aria-label="Funktioner">
+        <button type="button" class="note n1 selected" aria-pressed="true"><span class="pin"></span><b>1</b><p data-i18n="n1">Skriv og organisér</p><small data-i18n="n1s">Noter, PDF'er, fag og semestre samlet.</small></button>
+        <button type="button" class="note n2" aria-pressed="false"><span class="pin"></span><b>2</b><p data-i18n="n2">Tilføj din eksamen</p><small data-i18n="n2s">Vælg fag, dato, pensum og tid.</small></button>
+        <button type="button" class="note n3" aria-pressed="false"><span class="pin"></span><b>3</b><p data-i18n="n3">Få din personlige plan</p><small data-i18n="n3s">Læsning og repetition fordelt realistisk.</small></button>
+        <button type="button" class="note n4" aria-pressed="false"><span class="pin"></span><b>4</b><p data-i18n="n4">Læs direkte fra planen</p><small data-i18n="n4s">Åbn de rigtige noter og materialer.</small></button>
+        <button type="button" class="note n5" aria-pressed="false"><span class="pin"></span><b>5</b><p data-i18n="n5">Træn det, du har læst</p><small data-i18n="n5s">Flashcards og quizzer fra dine egne noter.</small></button>
+      </div>
+
+      <div class="dl" id="hent">
+        <a class="dl-note dl-mac" href="downloads/Note-it-macOS-Apple-Silicon.dmg" download="Note-it-macOS-Apple-Silicon.dmg">
+          <span class="pin"></span>
+          <span class="dl-icon" aria-hidden="true"></span>
+          <span class="dl-label">Mac med Apple chip</span>
+          <span class="dl-hint">M1, M2, M3, M4 eller nyere · macOS 11+</span>
+        </a>
+        <a class="dl-note dl-mac dl-mac-intel" href="downloads/Note-it-macOS-Intel.dmg" download="Note-it-macOS-Intel.dmg">
+          <span class="pin"></span>
+          <span class="dl-icon" aria-hidden="true"></span>
+          <span class="dl-label">Mac med Intel</span>
+          <span class="dl-hint">Intel processor · macOS 10.15+</span>
+        </a>
+        <a class="dl-note dl-win" href="downloads/Noteit-windows.zip" download>
+          <span class="pin"></span>
+          <span class="dl-icon" aria-hidden="true">⊞</span>
+          <span class="dl-label" data-i18n="downloadWin">Hent til Windows</span>
+          <span class="dl-hint" data-i18n="winHint">Windows 10 og 11</span>
+        </a>
+      </div>
+    </main>
+  </div>
+
+  <script src="site-i18n.js"></script>
+  <script src="site-effects.js"></script>
+</body>
+</html>
