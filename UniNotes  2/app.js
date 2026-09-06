@@ -14998,62 +14998,32 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
-// . codex-test-noteit-01
 
-// . codex-test-noteit-02
 
-// . codex-test-noteit-03
 
-// . codex-test-noteit-04
 
-// . codex-test-noteit-05
 
-// . codex-test-noteit-06
 
-// . codex-test-noteit-07
 
-// . codex-test-noteit-08
 
-// . codex-test-noteit-09
 
-// . codex-test-noteit-10
 
-// . codex-test-noteit-11
 
-// . codex-test-noteit-12
 
-// . codex-test-noteit-13
 
-// . codex-test-noteit-14
 
-// . codex-test-noteit-15
 
-// . codex-test-noteit-16
 
-// . codex-test-noteit-17
 
-// . codex-test-noteit-18
 
-// . codex-test-noteit-19
 
-// . codex-test-noteit-20
 
-// . codex-test-noteit-21
 
-// . codex-test-noteit-22
 
-// . codex-test-noteit-23
 
-// . codex-test-noteit-24
 
-// . codex-test-noteit-25
 
-// . codex-test-noteit-26
 
-// . codex-test-noteit-27
 
-// . codex-test-noteit-28
 
-// . codex-test-noteit-29
 
-// . codex-test-noteit-30
